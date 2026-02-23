@@ -62,7 +62,10 @@
 /* Grid Part 1 */
 
 #grid-section1 .grid {
-
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-rows: 100px;
+	grid-gap: 20px;
 }
 
 /* end Grid Part 1 */
