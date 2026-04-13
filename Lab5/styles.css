@@ -1,5 +1,6 @@
 /* Lab 5 — International Tip Calculator */
 
+/* Theme tokens for consistent spacing/colors across the form. */
 :root {
   --bg-page: #e8eaef;
   --bg-card: #ffffff;
@@ -60,6 +61,7 @@ body {
   color: var(--text-muted);
 }
 
+/* Card container for the calculator UI. */
 .calc-form {
   background: var(--bg-card);
   border-radius: var(--radius);
@@ -99,6 +101,7 @@ body {
   color: var(--text);
 }
 
+/* Two-column label/control layout on desktop. */
 .field {
   display: grid;
   grid-template-columns: minmax(0, 11rem) 1fr;
@@ -106,6 +109,7 @@ body {
   gap: 0.65rem 1rem;
 }
 
+/* Stack fields on small screens for mobile usability. */
 @media (max-width: 520px) {
   .field {
     grid-template-columns: 1fr;
@@ -169,6 +173,7 @@ body {
   padding-right: 2rem;
 }
 
+/* Visual treatment for computed, non-editable values. */
 .field__control--disabled {
   background: var(--bg-disabled);
   color: var(--text-muted);
@@ -191,6 +196,7 @@ body {
   min-width: 0;
 }
 
+/* Slider includes dynamic fill set through --tip-pct in JS. */
 .field__control--range {
   flex: 1 1 12rem;
   min-width: 0;
@@ -226,6 +232,7 @@ body {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+/* Inline validation message for invalid bill input. */
 .field-error {
   margin: -0.35rem 0 0;
   padding: 0.5rem 0.65rem;

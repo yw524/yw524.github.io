@@ -1,6 +1,7 @@
 (function () {
   "use strict";
 
+  // Assignment-provided conversion constants and tax rate.
   var EUR_PER_USD = 0.95;
   var INR_PER_USD = 85;
   var TAX_RATE = 0.11;
@@ -16,6 +17,7 @@
   var convertedTotalInput = document.getElementById("converted-total");
   var billError = document.getElementById("bill-error");
 
+  // Parse and validate bill input from the text field.
   function parseBill(raw) {
     var s = String(raw).trim();
     if (s === "") return { ok: true, value: 0 };
@@ -25,6 +27,7 @@
     return { ok: true, value: n };
   }
 
+  // Convert from USD to the selected display currency.
   function rateFor(code) {
     if (code === "USD") return 1;
     if (code === "EUR") return EUR_PER_USD;
@@ -39,6 +42,7 @@
     return "$";
   }
 
+  // Paint slider track so the left side reflects the chosen percent.
   function updateRangeTrackFill() {
     var pct = Number(tipSlider.value);
     var max = Number(tipSlider.max) || 100;
@@ -50,6 +54,7 @@
     return symbolFor(code) + amount.toFixed(2);
   }
 
+  // Reset all computed fields to zero state.
   function resetOutputs() {
     var code = currencySelect.value;
     totalWithTaxInput.value = (0).toFixed(2);
@@ -58,6 +63,7 @@
     convertedTotalInput.value = formatConverted(0, code);
   }
 
+  // Recalculate outputs on every form input/change event.
   function compute() {
     updateRangeTrackFill();
 
@@ -80,6 +86,7 @@
       return;
     }
 
+    // Tax is excluded only when the tax-exempt checkbox is checked.
     var totalWithTaxUsdDisplay;
     if (exempt) {
       totalWithTaxUsdDisplay = bill;
@@ -87,7 +94,7 @@
       totalWithTaxUsdDisplay = bill * (1 + TAX_RATE);
     }
 
-    // Match class example: when tax applies, tip is based on taxed subtotal.
+    // Class example expects tip based on the taxed subtotal.
     var tipUsd = totalWithTaxUsdDisplay * (tipPct / 100);
     var totalUsdWithTipAndTax = totalWithTaxUsdDisplay + tipUsd;
 
