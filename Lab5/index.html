@@ -53,12 +53,12 @@
         </select>
       </div>
 
-      <!-- Tip percent is selected via range and mirrored in the output badge. -->
+      <!-- Tip percent is selected via range and mirrored in a disabled text field. -->
       <div class="field field--tip">
         <label for="tip-slider" class="field__label">Tip:</label>
         <div class="tip-row">
           <input type="range" id="tip-slider" name="tipPercent" class="field__control field__control--range" min="0" max="100" value="0" step="1">
-          <output id="tip-percent-display" class="tip-readout" for="tip-slider" aria-live="polite" title="Tip percentage">0</output>
+          <input type="text" id="tip-percent-display" name="tipPercentDisplay" class="field__control field__control--disabled tip-readout" disabled readonly value="0" aria-live="polite" title="Tip percentage">
         </div>
       </div>
 

@@ -58,7 +58,7 @@
   function resetOutputs() {
     var code = currencySelect.value;
     totalWithTaxInput.value = (0).toFixed(2);
-    tipPercentOut.value = String(Number(tipSlider.value));
+    tipPercentOut.value = String(Number(tipSlider.value)) + "%";
     convertedTipInput.value = formatConverted(0, code);
     convertedTotalInput.value = formatConverted(0, code);
   }
@@ -79,7 +79,7 @@
     var bill = parsed.value;
     var exempt = taxExempt.checked;
     var tipPct = Number(tipSlider.value);
-    tipPercentOut.value = String(tipPct);
+    tipPercentOut.value = String(tipPct) + "%";
 
     if (bill === 0) {
       resetOutputs();
