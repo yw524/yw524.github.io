@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITMD 541 - Lab 5 - International Tip Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <header class="page__header">
+      <h1 class="page__title">Tip Calculator</h1>
+      <p class="page__meta">ITMD 541 ¡¤ Yudun Wang</p>
+    </header>
+
+    <form class="calc-form" id="tip-form" novalidate>
+      <section class="calc-form__section calc-form__section--rates" aria-labelledby="rates-heading">
+        <h2 id="rates-heading" class="calc-form__subheading">Currency conversion</h2>
+        <ul class="rate-list">
+          <li><span class="rate-list__usd">$1 USD</span> = &euro;0.95 EUR</li>
+          <li><span class="rate-list__usd">$1 USD</span> = &#8377;85 INR</li>
+        </ul>
+      </section>
+
+      <div class="field field--checkbox">
+        <input type="checkbox" id="tax-exempt" name="taxExempt" class="field__control">
+        <label for="tax-exempt" class="field__label">Tax exempt <span class="field__hint">(exclude tax from all calculations)</span></label>
+      </div>
+
+      <div class="field">
+        <label for="bill-total" class="field__label">Bill Total: $</label>
+        <input type="text" id="bill-total" name="billTotal" class="field__control field__control--text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="bill-error">
+      </div>
+      <p class="field-error" id="bill-error" role="alert" hidden></p>
+
+      <div class="field">
+        <label for="total-with-tax" class="field__label">Total Bill with Tax (11%):</label>
+        <input type="text" id="total-with-tax" name="totalWithTax" class="field__control field__control--text field__control--disabled" disabled readonly value="0.00">
+      </div>
+
+      <div class="field">
+        <label for="currency" class="field__label">Select Currency:</label>
+        <select id="currency" name="currency" class="field__control field__control--select">
+          <option value="USD" selected>US Dollars ($)</option>
+          <option value="EUR">Euros (&euro;)</option>
+          <option value="INR">Indian Rupee (&#8377;)</option>
+        </select>
+      </div>
+
+      <div class="field field--tip">
+        <label for="tip-slider" class="field__label">Tip:</label>
+        <div class="tip-row">
+          <input type="range" id="tip-slider" name="tipPercent" class="field__control field__control--range" min="0" max="100" value="0" step="1">
+          <output id="tip-percent-display" class="tip-readout" for="tip-slider" aria-live="polite" title="Tip percentage">0</output>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="converted-tip" class="field__label">Converted Tip Amount:</label>
+        <input type="text" id="converted-tip" name="convertedTip" class="field__control field__control--text field__control--disabled" disabled readonly value="0.00">
+      </div>
+
+      <div class="field">
+        <label for="converted-total" class="field__label">Converted Total Bill with Tip and Tax:</label>
+        <input type="text" id="converted-total" name="convertedTotal" class="field__control field__control--text field__control--disabled" disabled readonly value="0.00">
+      </div>
+    </form>
+  </main>
+  <script src="tip-calculator.js"></script>
+</body>
+</html>

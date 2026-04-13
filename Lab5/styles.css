@@ -1,0 +1,242 @@
+/* Lab 5 — International Tip Calculator */
+
+:root {
+  --bg-page: #e8eaef;
+  --bg-card: #ffffff;
+  --bg-disabled: #e4e6ec;
+  --border: #c8ced9;
+  --text: #1a1d26;
+  --text-muted: #5c6373;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.12);
+  --danger: #b91c1c;
+  --danger-bg: #fee2e2;
+  --radius: 14px;
+  --shadow: 0 18px 45px rgba(15, 23, 42, 0.09);
+  --font: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(37, 99, 235, 0.08), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(99, 102, 241, 0.07), transparent 50%),
+    var(--bg-page);
+}
+
+.page {
+  width: min(100% - 1.5rem, 38rem);
+  margin-inline: auto;
+  padding: clamp(1.25rem, 4vw, 2.5rem) 0;
+}
+
+.page__header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.page__title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.75rem, 4.5vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.page__meta {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.calc-form {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  padding: clamp(1.25rem, 3vw, 1.85rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.calc-form__section--rates {
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.calc-form__subheading {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rate-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.rate-list li + li {
+  margin-top: 0.25rem;
+}
+
+.rate-list__usd {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.field {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) 1fr;
+  align-items: center;
+  gap: 0.65rem 1rem;
+}
+
+@media (max-width: 520px) {
+  .field {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .field__label {
+    margin-bottom: -0.25rem;
+  }
+}
+
+.field--checkbox {
+  grid-template-columns: auto 1fr;
+  padding: 0.65rem 0.85rem;
+  background: var(--accent-soft);
+  border-radius: 10px;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.field--checkbox .field__label {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.field__hint {
+  display: block;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.field__label {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.field__control {
+  width: 100%;
+  max-width: 100%;
+  font: inherit;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field__control--text:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field__control--select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235c6373' d='M1.41 0 6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+.field__control--disabled {
+  background: var(--bg-disabled);
+  color: var(--text-muted);
+  border-style: solid;
+  border-color: #d1d5e0;
+  cursor: not-allowed;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.field--tip .field__label {
+  align-self: start;
+  padding-top: 0.35rem;
+}
+
+.tip-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.field__control--range {
+  flex: 1 1 12rem;
+  min-width: 0;
+  height: 6px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--tip-pct, 0%), #d1d5e0 var(--tip-pct, 0%), #d1d5e0 100%);
+  accent-color: var(--accent);
+}
+
+.field__control--range:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.tip-readout {
+  flex: 0 0 auto;
+  min-width: 3rem;
+  max-width: 5rem;
+  display: inline-block;
+  text-align: center;
+  font: inherit;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  background: #334155;
+  color: #f8fafc;
+  border: 1px solid #1e293b;
+  cursor: default;
+  user-select: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.field-error {
+  margin: -0.35rem 0 0;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--danger);
+  background: var(--danger-bg);
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+}
+
+.field-error[hidden] {
+  display: none;
+}
