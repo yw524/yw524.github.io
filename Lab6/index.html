@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITMD 541 - Sunrise Sunset Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="dashboard">
+    <!-- Page identity and short description for the dashboard experience. -->
+    <header class="hero">
+      <p class="hero__course">ITMD 541 - Yudun Wang</p>
+      <h1>Sunrise &amp; Sunset Dashboard</h1>
+      <p class="hero__subtitle">Compare today and tomorrow solar events for preset cities or your current location.</p>
+    </header>
+
+    <!-- Input controls: either choose a preset city or use Geolocation API. -->
+    <section class="controls" aria-labelledby="controls-title">
+      <h2 id="controls-title">Find a Location</h2>
+
+      <div class="control-grid">
+        <label class="field">
+          <span>Choose a city</span>
+          <select id="location-select" name="location">
+            <option value="" selected disabled>Select a location</option>
+          </select>
+        </label>
+
+        <button id="search-btn" type="button" class="btn btn--primary">Get Sunrise &amp; Sunset</button>
+        <button id="geo-btn" type="button" class="btn btn--secondary">Use Current Location</button>
+      </div>
+
+      <!-- Live status text is updated by JavaScript for loading/success/error states. -->
+      <p id="status-message" class="status-message" role="status" aria-live="polite">
+        Select a city or use current location to load today and tomorrow reports.
+      </p>
+    </section>
+
+    <!-- Reserved result cards stay visible before and after data loads. -->
+    <section class="results" aria-live="polite">
+      <article class="report-card report-card--today">
+        <div class="report-card__header">
+          <h3>Today</h3>
+          <p id="today-date">Date: --</p>
+        </div>
+        <p id="today-location" class="location-label">Location: --</p>
+        <dl id="today-metrics" class="metrics"></dl>
+      </article>
+
+      <article class="report-card report-card--tomorrow">
+        <div class="report-card__header">
+          <h3>Tomorrow</h3>
+          <p id="tomorrow-date">Date: --</p>
+        </div>
+        <p id="tomorrow-location" class="location-label">Location: --</p>
+        <dl id="tomorrow-metrics" class="metrics"></dl>
+      </article>
+    </section>
+
+    <!-- Required attribution from the SunriseSunset API documentation. -->
+    <footer class="footer-note">
+      <p>Data source and API credit: Powered by <a href="https://sunrisesunset.io/" target="_blank" rel="noopener noreferrer">SunriseSunset.io</a>.</p>
+    </footer>
+  </main>
+
+  <!-- External JS keeps behavior separate from document structure. -->
+  <script src="app.js"></script>
+</body>
+</html>
